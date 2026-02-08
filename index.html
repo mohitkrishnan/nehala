@@ -17,7 +17,6 @@
             overflow: hidden;
         }
 
-        /* 1. Intro Screen */
         #introScreen {
             position: fixed;
             inset: 0;
@@ -28,11 +27,9 @@
             align-items: center;
             justify-content: center;
             z-index: 1000;
-            opacity: 1;
             transition: opacity 0.8s ease;
         }
 
-        /* 2. Containers */
         .container {
             background: rgba(255, 255, 255, 0.95);
             padding: 2.5rem;
@@ -48,9 +45,9 @@
         
         .main-img {
             width: 100%;
-            max-width: 220px;
+            max-width: 200px;
             border-radius: 20px;
-            margin-bottom: 20px;
+            margin-bottom: 25px; /* Pushes text down from the gif */
         }
 
         .buttons {
@@ -75,20 +72,26 @@
         #yesBtn { background: #ff4d6d; color: white; }
         #noBtn { background-color: #6c757d; color: white; position: relative; }
 
-        /* Slideshow */
+        /* Updated Slideshow - Moved Down */
         .slideshow {
             position: relative;
-            height: 300px;
+            height: 350px;
             width: 100%;
-            margin: 20px 0;
+            margin-top: 40px; /* This moves the photos further down from the text */
+            margin-bottom: 20px;
             border-radius: 20px;
             overflow: hidden;
+            background: #eee;
         }
+        
         .slideshow img {
             position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             object-fit: cover;
-            transition: opacity 1s;
+            transition: opacity 1.5s ease-in-out;
         }
 
         .hidden { display: none !important; }
@@ -119,23 +122,23 @@
     </div>
 
     <div class="container hidden" id="happyEnd">
-        <h1 style="font-size: 2rem;">I Knew It! 🥰❤️</h1>
+        <h1 style="font-size: 2rem; margin-top: 10px;">I Knew It! 🥰❤️</h1>
+        
         <div class="slideshow">
-            <img src="couple1.jpg" id="slide1" style="opacity: 1;">
-            <img src="couple2.jpg" id="slide2" style="opacity: 0;">
+            <img src="couple1.jpg" id="slide1" style="opacity: 1;" onerror="this.src='https://via.placeholder.com/400x400?text=Check+File+Name+couple1.jpg'">
+            <img src="couple2.jpg" id="slide2" style="opacity: 0;" onerror="this.src='https://via.placeholder.com/400x400?text=Check+File+Name+couple2.jpg'">
         </div>
-        <p style="font-weight: bold; color: #d63384;">Happy Proposal Day!</p>
+        
+        <p style="font-weight: bold; color: #d63384; font-size: 1.2rem; margin-bottom: 10px;">Happy Proposal Day, My Love!</p>
     </div>
 
     <script>
         let yesSize = 1;
 
         function revealProposal() {
-            // Hide intro screen
             document.getElementById('introScreen').style.opacity = '0';
             setTimeout(() => {
                 document.getElementById('introScreen').classList.add('hidden');
-                // Show question box
                 document.getElementById('questionBox').classList.remove('hidden');
             }, 800);
         }
@@ -143,14 +146,11 @@
         function moveAndGrow() {
             const noBtn = document.getElementById('noBtn');
             const yesBtn = document.getElementById('yesBtn');
-            
             const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
             const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
-            
             noBtn.style.position = 'fixed';
             noBtn.style.left = x + 'px';
             noBtn.style.top = y + 'px';
-
             yesSize += 0.2;
             yesBtn.style.transform = "scale(" + yesSize + ")";
         }
@@ -160,7 +160,7 @@
             document.getElementById('happyEnd').classList.remove('hidden');
             document.body.style.background = "#ff4d6d";
             
-            // Start Hearts
+            // Hearts
             setInterval(() => {
                 const heart = document.createElement('div');
                 heart.innerHTML = '❤️';
@@ -174,11 +174,11 @@
                 setTimeout(() => { heart.remove(); }, 3500);
             }, 200);
 
-            // Start Slideshow
+            // Slideshow
             const s1 = document.getElementById('slide1');
             const s2 = document.getElementById('slide2');
             setInterval(() => {
-                if (s1.style.opacity === "1") {
+                if (s1.style.opacity == "1") {
                     s1.style.opacity = "0";
                     s2.style.opacity = "1";
                 } else {
