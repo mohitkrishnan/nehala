@@ -23,15 +23,34 @@
             border-radius: 25px;
             box-shadow: 0 15px 35px rgba(0,0,0,0.1);
             max-width: 450px;
-            width: 90%;
+            width: 85%;
             z-index: 10;
+            animation: fadeIn 1.5s ease-in;
         }
 
-        h1 { color: #d63384; font-size: 1.5rem; line-height: 1.4; margin-bottom: 20px; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h1 { 
+            color: #d63384; 
+            font-size: 1.4rem; 
+            line-height: 1.6; 
+            margin-bottom: 15px; 
+            font-weight: 600;
+        }
+
+        .sub-text {
+            color: #ff4d6d;
+            font-size: 1.2rem;
+            margin-bottom: 25px;
+            font-weight: bold;
+        }
         
         .main-img {
             width: 100%;
-            max-width: 220px;
+            max-width: 200px;
             border-radius: 15px;
             margin-bottom: 20px;
         }
@@ -41,7 +60,7 @@
             justify-content: center;
             gap: 20px;
             height: 50px;
-            margin-top: 30px;
+            margin-top: 20px;
         }
 
         button {
@@ -54,7 +73,7 @@
             transition: 0.3s;
         }
 
-        #yesBtn { background-color: #ff4d6d; color: white; }
+        #yesBtn { background-color: #ff4d6d; color: white; box-shadow: 0 4px 10px rgba(255, 77, 109, 0.3); }
         #noBtn { background-color: #adb5bd; color: white; position: relative; }
 
         .hidden { display: none; }
@@ -62,19 +81,18 @@
         .final-img {
             width: 100%;
             border-radius: 20px;
-            margin: 20px 0;
+            margin: 15px 0;
             box-shadow: 0 5px 15px rgba(0,0,0,0.2);
         }
-
-        p { color: #555; font-size: 1.1rem; }
     </style>
 </head>
 <body>
 
     <div class="container" id="questionBox">
         <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHIxdmF4empxZmxoZzR4ZzR4ZzR4ZzR4ZzR4ZzR4ZzR4ZzR4JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1z/v4aP0v0jUz4M8/giphy.gif" class="main-img">
+        
         <h1>Since we've completed our first year together, are you ready for the ride ahead, Nehala? ❤️</h1>
-        <p>Do you love me?</p>
+        <div class="sub-text">Do you love me?</div>
         
         <div class="buttons">
             <button id="yesBtn" onclick="celebrate()">Yes!</button>
@@ -91,7 +109,6 @@
     <script>
         function moveButton() {
             const noBtn = document.getElementById('noBtn');
-            // Move the button so she can't click it
             const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
             const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
             
@@ -113,7 +130,6 @@
                 heart.style.position = 'fixed';
                 heart.style.left = Math.random() * 100 + 'vw';
                 heart.style.top = '-20px';
-                heart.style.zIndex = '1';
                 heart.style.fontSize = (Math.random() * 20 + 15) + 'px';
                 heart.style.transition = 'transform 3s linear';
                 document.body.appendChild(heart);
