@@ -3,140 +3,229 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>For Nehala ❤️</title>
+    <title>A Special Message for Nehala ❤️</title>
     <style>
         body {
-            background-color: #ffeef2;
+            background: radial-gradient(circle, #ffafbd, #ffc3a0);
             display: flex;
             align-items: center;
             justify-content: center;
             height: 100vh;
             margin: 0;
-            font-family: 'Arial', sans-serif;
+            font-family: 'Georgia', serif;
             text-align: center;
             overflow: hidden;
+            transition: background 1.5s ease;
         }
 
+        /* 1. Dramatic Intro Screen */
+        #introScreen {
+            position: fixed;
+            inset: 0;
+            background: #1a1a1a;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 100;
+            transition: opacity 1s ease;
+        }
+
+        /* 2. Main Content Container */
         .container {
-            background: white;
+            background: rgba(255, 255, 255, 0.95);
             padding: 2.5rem;
-            border-radius: 25px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            border-radius: 30px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.2);
             max-width: 450px;
             width: 85%;
             z-index: 10;
-            animation: fadeIn 1.5s ease-in;
+            transform: scale(0.9);
+            animation: popIn 0.8s forwards cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+        @keyframes popIn {
+            to { transform: scale(1); }
         }
 
-        h1 { 
-            color: #d63384; 
-            font-size: 1.4rem; 
-            line-height: 1.6; 
-            margin-bottom: 15px; 
-            font-weight: 600;
-        }
-
-        .sub-text {
-            color: #ff4d6d;
-            font-size: 1.2rem;
-            margin-bottom: 25px;
-            font-weight: bold;
-        }
+        h1 { color: #d63384; font-size: 1.6rem; line-height: 1.5; margin-bottom: 10px; }
+        .sub-text { color: #ff4d6d; font-size: 1.3rem; font-weight: bold; margin-bottom: 20px; }
         
         .main-img {
             width: 100%;
-            max-width: 200px;
-            border-radius: 15px;
+            max-width: 220px;
+            border-radius: 20px;
             margin-bottom: 20px;
         }
 
+        /* Buttons */
         .buttons {
             display: flex;
             justify-content: center;
+            align-items: center;
             gap: 20px;
-            height: 50px;
             margin-top: 20px;
+            min-height: 120px; /* Space for growing button */
         }
 
         button {
-            padding: 12px 30px;
+            padding: 15px 35px;
             font-size: 1.1rem;
             border: none;
             border-radius: 50px;
             cursor: pointer;
             font-weight: bold;
-            transition: 0.3s;
+            transition: all 0.3s ease;
         }
 
-        #yesBtn { background-color: #ff4d6d; color: white; box-shadow: 0 4px 10px rgba(255, 77, 109, 0.3); }
-        #noBtn { background-color: #adb5bd; color: white; position: relative; }
+        #yesBtn { 
+            background: linear-gradient(45deg, #ff4d6d, #ff758c);
+            color: white; 
+            box-shadow: 0 10px 20px rgba(255, 77, 109, 0.4);
+            z-index: 50;
+        }
+
+        #noBtn { background-color: #6c757d; color: white; position: relative; }
+
+        /* Slideshow Styling */
+        .slideshow {
+            position: relative;
+            height: 350px;
+            width: 100%;
+            margin: 20px 0;
+            overflow: hidden;
+            border-radius: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .slideshow img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: opacity 1.5s ease-in-out;
+        }
 
         .hidden { display: none; }
-        
-        .final-img {
-            width: 100%;
-            border-radius: 20px;
-            margin: 15px 0;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+
+        /* Dramatic Pulse for Intro Button */
+        .pulse {
+            animation: pulseAnim 2s infinite;
+        }
+        @keyframes pulseAnim {
+            0% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.7); }
+            70% { box-shadow: 0 0 0 20px rgba(255, 255, 255, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0); }
         }
     </style>
 </head>
 <body>
 
-    <div class="container" id="questionBox">
-        <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHIxdmF4empxZmxoZzR4ZzR4ZzR4ZzR4ZzR4ZzR4ZzR4ZzR4JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1z/v4aP0v0jUz4M8/giphy.gif" class="main-img">
+    <div id="introScreen">
+        <h2 style="font-style: italic; margin-bottom: 30px;">A special message for Nehala...</h2>
+        <button class="pulse" onclick="revealProposal()" style="background: white; color: #d63384; padding: 20px 40px;">Open with Love</button>
+    </div>
+
+    <div class="container hidden" id="questionBox">
+        <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHIxdmF4empxZmxoZzR4ZzR4ZzR4ZzR4ZzR4ZzR4ZzR4ZzR4JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1z/v4aP0v0jUz4M8/giphy.gif" class="main-img" alt="Cute animation">
         
         <h1>Since we've completed our first year together, are you ready for the ride ahead, Nehala? ❤️</h1>
         <div class="sub-text">Do you love me?</div>
         
         <div class="buttons">
-            <button id="yesBtn" onclick="celebrate()">Yes!</button>
-            <button id="noBtn" onmouseover="moveButton()" onclick="moveButton()">No</button>
+            <button id="yesBtn" onclick="celebrate()">YES!</button>
+            <button id="noBtn" onmouseover="moveAndGrow()" onclick="moveAndGrow()">No</button>
         </div>
     </div>
 
     <div class="container hidden" id="happyEnd">
-        <h1>Yay! See you soon, Nehala! 🥰❤️</h1>
-        <img src="couple.jpg" alt="Our Photo" class="final-img">
-        <p>You've made this the best Feb 8th ever!</p>
+        <h1 style="font-size: 2.2rem;">I Knew It! 🥰❤️</h1>
+        
+        <div class="slideshow">
+            <img src="couple1.jpg" id="slide1" alt="Our memory 1">
+            <img src="couple2.jpg" id="slide2" alt="Our memory 2" style="opacity: 0;">
+        </div>
+        
+        <p style="font-weight: bold; color: #d63384; font-size: 1.3rem;">Happy Proposal Day!</p>
+        <p style="font-style: italic; color: #555;">Here's to us, forever.</p>
     </div>
 
     <script>
-        function moveButton() {
+        let yesSize = 1;
+
+        // Transition from intro to proposal
+        function revealProposal() {
+            const intro = document.getElementById('introScreen');
+            intro.style.opacity = '0';
+            setTimeout(() => {
+                intro.classList.add('hidden');
+                document.getElementById('questionBox').classList.remove('hidden');
+            }, 1000);
+        }
+
+        // The No button runs away and makes the Yes button bigger
+        function moveAndGrow() {
             const noBtn = document.getElementById('noBtn');
+            const yesBtn = document.getElementById('yesBtn');
+            
+            // Random movement
             const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
             const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
-            
             noBtn.style.position = 'fixed';
             noBtn.style.left = x + 'px';
             noBtn.style.top = y + 'px';
+
+            // Increase Yes button size
+            yesSize += 0.3;
+            yesBtn.style.transform = `scale(${yesSize})`;
         }
 
+        // Final celebration sequence
         function celebrate() {
             document.getElementById('questionBox').classList.add('hidden');
             document.getElementById('happyEnd').classList.remove('hidden');
+            document.body.style.background = "#ff4d6d";
             startHearts();
+            startSlideshow();
         }
 
+        // Cross-fade slideshow logic
+        function startSlideshow() {
+            const s1 = document.getElementById('slide1');
+            const s2 = document.getElementById('slide2');
+            setInterval(() => {
+                if (s1.style.opacity === "0") {
+                    s1.style.opacity = "1";
+                    s2.style.opacity = "0";
+                } else {
+                    s1.style.opacity = "0";
+                    s2.style.opacity = "1";
+                }
+            }, 3000); // Swaps every 3 seconds
+        }
+
+        // Floating heart animation
         function startHearts() {
             setInterval(() => {
                 const heart = document.createElement('div');
-                heart.innerHTML = '❤️';
+                heart.innerHTML = ['❤️','💖','✨','🌸','💕'][Math.floor(Math.random()*5)];
                 heart.style.position = 'fixed';
                 heart.style.left = Math.random() * 100 + 'vw';
                 heart.style.top = '-20px';
-                heart.style.fontSize = (Math.random() * 20 + 15) + 'px';
+                heart.style.fontSize = (Math.random() * 20 + 20) + 'px';
                 heart.style.transition = 'transform 3s linear';
+                heart.style.zIndex = '1';
                 document.body.appendChild(heart);
                 
-                setTimeout(() => { heart.style.transform = 'translateY(110vh)'; }, 50);
+                setTimeout(() => { 
+                    heart.style.transform = `translateY(110vh) rotate(${Math.random()*360}deg)`; 
+                }, 50);
+                
                 setTimeout(() => { heart.remove(); }, 3500);
-            }, 200);
+            }, 150);
         }
     </script>
 </body>
